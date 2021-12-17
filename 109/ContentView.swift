@@ -10,7 +10,17 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         Text("Hello, world!")
-            .padding()
+            .onAppear {
+                let url = URL(string: "https://www.apple.com")!
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if data != nil {
+                        print("We got data!")
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                }.resume()
+            }
     }
 }
 
